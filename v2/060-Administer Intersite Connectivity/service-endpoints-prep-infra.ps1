@@ -9,6 +9,9 @@ $username = "kodekloud" #username for the VM
 $plainPassword = "VMP@55w0rd" #your VM password
 $password = ConvertTo-SecureString $plainPassword -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential ($username, $password);
+#Create RG
+Write-Host "Adding resource group : $rg " -ForegroundColor "Yellow" -BackgroundColor "Black"
+New-AzResourceGroup -n $rg -l $region | Out-Null
 #Create VM
 Write-Host "Creating VM" -ForegroundColor "Yellow" -BackgroundColor "Black"
 $spAvm = New-AzVM -Name "vm-01" `
@@ -22,7 +25,7 @@ $spAvm = New-AzVM -Name "vm-01" `
     -PublicIpAddressName "vm-01-pip" `
     -PublicIpSku Standard
 $fqdn = $spAvm.FullyQualifiedDomainName
-Write-Host "workload-a-vm-$i FQDN : $fqdn " -ForegroundColor Green 
+Write-Host "vm-01 FQDN : $fqdn " -ForegroundColor Green 
 
 #Create storage
 Write-Host "Creating storage" -ForegroundColor "Yellow" -BackgroundColor "Black"

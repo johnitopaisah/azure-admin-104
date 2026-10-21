@@ -35,7 +35,7 @@ $linuxVm = New-AzVM -Name 'linux-prod-server' `
   -ResourceGroupName $rg `
   -Location $region `
   -Size 'Standard_B1s' `
-  -Image UbuntuLTS `
+  -Image Ubuntu2204 `
   -VirtualNetworkName prod-eus-vnet `
   -SubnetName 'privateSubnet' `
   -Credential $credential 

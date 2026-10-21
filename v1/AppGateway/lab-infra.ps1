@@ -58,7 +58,7 @@ $webRule = New-AzNetworkSecurityRuleConfig -Name web-rule -Description "Allow HT
     -DestinationAddressPrefix * -DestinationPortRange 80
 
 $networkSecurityGroup = New-AzNetworkSecurityGroup -ResourceGroupName $rg `
--Location $region -Name "appGwNSG" -SecurityRules $rdpRule
+-Location $region -Name "appGwNSG" -SecurityRules $webRule
 
 Set-AzVirtualNetworkSubnetConfig -Name greenSubnet -VirtualNetwork $vnet -AddressPrefix "10.0.1.0/24" `
 -NetworkSecurityGroup $networkSecurityGroup
@@ -205,7 +205,7 @@ $Params = @{
     Publisher          = 'Microsoft.Azure.Extensions'
     ExtensionType      = 'CustomScript'
     TypeHandlerVersion = '2.1'
-    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/AppGateway/jumpbox.sh'); commandToExecute = './jumpbox.sh'}
+    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-az500/main/000-Code%20files/AppGateway/jumpbox.sh'); commandToExecute = './jumpbox.sh'}
 }
 Set-AzVMExtension @Params
 

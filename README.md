@@ -31,6 +31,18 @@ Before running the scripts, ensure you have the following prerequisites installe
 - Azure PowerShell Module
 - Azure Command-Line Interface (CLI)
 
+## Running on macOS / Linux with the Azure CLI
+
+Every `.ps1` script now has an equivalent Azure CLI bash script (`.sh`) next to it. Those run directly from zsh or bash, with no PowerShell needed:
+
+```zsh
+brew install azure-cli && az login
+cd "v2/070-Administer Network Traffic"
+./appgw-prep-infra.sh
+```
+
+See [v1/README.md](v1/README.md) and [v2/README.md](v2/README.md) for setup, options and troubleshooting. Each lab folder also has its own README with exactly what gets created and how to run, verify and clean up.
+
 ## Issues and Contributions
 
 Encounter an issue or error in the code? Please feel free to open an issue in this repository. Contributions are also welcome if you have enhancements or fixes for the scripts provided.

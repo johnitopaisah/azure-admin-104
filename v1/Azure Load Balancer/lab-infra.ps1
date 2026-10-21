@@ -47,7 +47,7 @@ $webRule = New-AzNetworkSecurityRuleConfig -Name web-rule -Description "Allow HT
     -DestinationAddressPrefix * -DestinationPortRange 80
 
 $networkSecurityGroup = New-AzNetworkSecurityGroup -ResourceGroupName $rg `
--Location $region -Name "webNSG" -SecurityRules $rdpRule
+-Location $region -Name "webNSG" -SecurityRules $webRule
 
 Set-AzVirtualNetworkSubnetConfig -Name webSubnet -VirtualNetwork $vnet -AddressPrefix "10.0.2.0/24" `
 -NetworkSecurityGroup $networkSecurityGroup
@@ -99,7 +99,7 @@ $jumpVm = New-AzVM -Name jumpbox-vm `
 -ResourceGroupName $rg `
 -Location $region `
 -Size 'Standard_B1s' `
--Image UbuntuLTS `
+-Image Ubuntu2204 `
 -VirtualNetworkName eus-web-dev `
 -SubnetName jumpboxSubnet `
 -Credential $credential `
@@ -114,7 +114,7 @@ $Params = @{
     Publisher          = 'Microsoft.Azure.Extensions'
     ExtensionType      = 'CustomScript'
     TypeHandlerVersion = '2.1'
-    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-azure/main/Azure%20Load%20Balancer/jumpbox.sh'); commandToExecute = './jumpbox.sh'}
+    Settings          = @{fileUris = @('https://raw.githubusercontent.com/rithinskaria/kodekloud-az500/main/000-Code%20files/Azure%20Load%20Balancer/jumpbox.sh'); commandToExecute = './jumpbox.sh'}
 }
 Set-AzVMExtension @Params
 
